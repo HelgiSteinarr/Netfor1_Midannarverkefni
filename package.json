@@ -1,9 +1,9 @@
 {
   "name": "netforritun_mid",
   "version": "0.0.1",
-  "author": "Fisedush corporation",
-  "description": "Verkefni í entforritun",
-  "license": null,
+  "author": "Fisedush Enterprises",
+  "description": "Verkefni í netforritun",
+  "license": "WTFPL",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
