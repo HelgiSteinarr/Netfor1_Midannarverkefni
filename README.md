@@ -1,4 +1,4 @@
-# netforritun_mid
+# Netforritun miðannarverkefni
 
 > Verkefni í entforritun
 
