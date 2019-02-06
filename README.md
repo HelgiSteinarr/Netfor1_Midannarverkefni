@@ -2,7 +2,7 @@
 
 > Verkefni í entforritun
 
-#### Build Setup
+#### Setup
 
 ``` bash
 # install dependencies
