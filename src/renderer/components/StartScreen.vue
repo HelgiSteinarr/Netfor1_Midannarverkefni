@@ -10,17 +10,24 @@
 		<span class="flex_item">
 			<h2>Fisedush Ent.</h2>
 		</span>
-		
-
     </header>
     <main>
-		<div class="left-side">
-			<span class="title">
-				Sum info
-			</span>
-			<system-information></system-information>
-		</div>
+		<ul>
+			<li>
+				<router-link to="/host">Host game</router-link>
+			</li>
+			<li>
+				<router-link to="/join">Join game</router-link>
+			</li>
+			<li>
+				<router-link to="/exit" id="e">Exit</router-link>
+			</li>
+		</ul>
    	</main>
+	<footer>
+			
+	</footer>
+
   </div>
 </template>
 
@@ -28,7 +35,7 @@
   import SystemInformation from './LandingPage/SystemInformation'
 
   export default {
-    name: 'landing-page',
+    name: 'start-screen',
     components: { SystemInformation },
     methods: {
       open (link) {
@@ -52,9 +59,12 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
+	list-style: none;
 }
-
-body { font-family: 'Source Sans Pro', sans-serif; }
+body { 
+	font-family: 'Source Sans Pro', sans-serif; 
+}
 
 #wrapper {
 	background:
@@ -89,19 +99,26 @@ main {
 }
 main > div { flex-basis: 50%; }
 
-.left-side {
-	display: flex;
-	flex-direction: column;
+main ul{
+	margin: 0 auto;
+	text-align: center;
+	width: 200px;
+	text-decoration: none;
+	margin-top: 20px;
 }
-.title {
-	color: #2c3e50;
+main ul li a{
+	color: black;
+	display: block;
+	padding: 7px;
 	font-size: 20px;
-	font-weight: bold;
-	margin-bottom: 6px;
+	transition: color 0.2s ease-out, transform 0.2s ease-out;
 }
-
-.title.alt {
-	font-size: 18px;
-	margin-bottom: 10px;
+main ul li a:hover{
+	color: darkorchid;
+	transform: scale(1.3);
+}
+main ul li a#e:hover{
+	cursor: not-allowed;
+	transform: scale(0.01);
 }
 </style>
