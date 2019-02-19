@@ -26,8 +26,8 @@ export default {
     name: 'join-screen',
     data() {
         return {
-            gameId: String,
-            usrName: String
+            gameId: "",
+            usrName: ""
         }
     }
 }

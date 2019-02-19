@@ -16,12 +16,12 @@ export default new Router({
       component: require('@/components/HostScreen').default
     },
     {
-      path: '/join',
+      path: '/game',
       name: 'join-screen',
       component: require('@/components/JoinScreen').default
     },
     {
-      path: '/game',
+      path: '/join',
       name: 'game-screen',
       component: require('@/components/GameScreen').default
     },
