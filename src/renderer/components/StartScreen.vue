@@ -45,7 +45,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 @import url('https://fonts.googleapis.com/css?family=Alice|Fredericka+the+Great|Righteous|ZCOOL+KuaiLe');
 /*
