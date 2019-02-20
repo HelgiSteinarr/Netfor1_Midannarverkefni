@@ -37,6 +37,6 @@ export default class ClientNetwork {
             console.log("Error: not connected (L43, clientNetwork.js)");
             return;
         }
-        this.hostConnection.send(data);
+        this.hostConnection.send(JSON.stringify(data));
     }
 }
