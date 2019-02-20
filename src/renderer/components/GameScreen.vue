@@ -1,15 +1,20 @@
 <template>
-    <main>
-      <span></span>
-      <div>
-        <ul>
-          <li><h3>Playerlist</h3></li>
-        </ul>
-      </div>
-      <canvas ref="canvas" width="900px" height="600px"
-              @mousemove="mouseMove" @mouseup="mouseUp"
-              @mousedown="mouseDown" @mouseleave="mouseLeave"></canvas>
-    </main>
+	<main>
+		<span></span>
+		<div>
+		<ul id="playerList">
+			<li><h3>Playerlist</h3></li>
+		</ul>
+		</div>
+		<canvas ref="canvas" width="900px" height="600px"
+				@mousemove="mouseMove" @mouseup="mouseUp"
+				@mousedown="mouseDown" @mouseleave="mouseLeave"
+				@mouseenter="mouseEnter"></canvas>
+		<ul id="colorPicker">
+			<li id="clear" @click="clearCanvas()"> Clear canvas</li>
+			<li v-for="color of colors" :key="colors.indexOf(color)" @click="colorSelected(colors.indexOf(color))" :style="{background: color.code, transform: (curColor == colors.indexOf(color) ? 'scale(0.9)' : 'scale(1)') }"></li>
+		</ul>
+	</main>
 </template>
 
 <script>
@@ -22,66 +27,130 @@ export default {
 import Game from '../gamelogic/game';
 
 export default {
-  mounted() {
-    this.context = this.$refs.canvas.getContext("2d");
-  },
+mounted() {
+	this.context = this.$refs.canvas.getContext("2d");
+	document.onmousedown = () => {
+		this._mouseDown = true;
+	};
+	document.onmouseup = () => {
+		this._mouseDown = false;	
+	};
+},
+data() {
+	return {
+		paint: false,
+		context: null,
+		clickX: new Array(),
+		clickY: new Array(),
+		clickDrag: new Array(),
+		clickColor: new Array(),
+		_mouseDown: false,
+		curColor: 0,
+		colors: [{
+			name:"Red",
+			code:"#FF0000"
+		},
+		{
+			name:"Orange",
+			code:"#FF7F00"
+		},
+		{
+			name:"Yellow",
+			code:"#FFFF00"
+		},
+		{
+			name:"Green",
+			code:"#00FF00"
+		},
+		{
+			name:"Blue",
+			code:"#0000FF"
+		},
+		{
+			name:"Indigo",
+			code:"#4B0082"
+		},
+		{
+			name:"Violet",
+			code:"#9400D3"
+		},
+		{
+			name:"Black",
+			code:"#000000"
+		}]
+	}
+},
 
-  data() {
-    return {
-      paint: false,
-      context: null,
-      clickX: new Array(),
-      clickY: new Array(),
-      clickDrag: new Array()
-    }
-  },
-
-  methods: {
+methods: {
     mouseMove(e) {
-      if(this.paint){
-        this.addClick(e.pageX - this.$refs.canvas.offsetLeft, e.pageY - this.$refs.canvas.offsetTop, true);
-        this.redraw();
-      }
+		if(this.paint){
+			this.addClick(e.pageX - this.$refs.canvas.offsetLeft, e.pageY - this.$refs.canvas.offsetTop, true);
+			this.redraw();
+		}
     },
     mouseUp(e) {
-      this.paint = false;
+      	this.paint = false;
     },
     mouseDown(e) {
-      const mouseX = e.pageX - this.$refs.canvas.offsetLeft;
-      const mouseY = e.pageY - this.$refs.canvas.offsetTop;
+      	const mouseX = e.pageX - this.$refs.canvas.offsetLeft;
+      	const mouseY = e.pageY - this.$refs.canvas.offsetTop;
 
-      this.paint = true;
-      this.addClick(mouseX, mouseY);
-      this.redraw()
+      	this.paint = true;
+      	this.addClick(mouseX, mouseY);
+      	this.redraw();
     },
     mouseLeave(e) {
-      this.paint = false;
-    },
+      	this.paint = false;
+	},
+	mouseEnter(e) {
+		if (this._mouseDown) {
+			const mouseX = e.pageX - this.$refs.canvas.offsetLeft;
+			const mouseY = e.pageY - this.$refs.canvas.offsetTop;
+
+			this.paint = true;
+			this.addClick(mouseX, mouseY, false);
+		}
+	},
     redraw() {
-      this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height); // Clears the canvas
+      	this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height); // Clears the canvas
   
-      this.context.strokeStyle = "#df4b26";
-      this.context.lineJoin = "round";
-      this.context.lineWidth = 5;
+      	/*this.context.strokeStyle = "#df4b26";*/
+		this.context.lineJoin = "round";
+		this.context.lineWidth = 5;
           
-      for(let i=0; i < this.clickX.length; i++) {		
-        this.context.beginPath();
-        if(this.clickDrag[i] && i){
-          this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
-        }else{
-          this.context.moveTo(this.clickX[i]-1, this.clickY[i]);
-        }
-        this.context.lineTo(this.clickX[i], this.clickY[i]);
-        this.context.closePath();
-        this.context.stroke();
-      }
+		for(let i=0; i < this.clickX.length; i++) {		
+			this.context.beginPath();
+			if(this.clickDrag[i] && i){
+				this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
+			}else{
+				this.context.moveTo(this.clickX[i]-1, this.clickY[i]);
+			}
+			this.context.lineTo(this.clickX[i], this.clickY[i]);
+			this.context.closePath();
+
+			this.context.strokeStyle = this.colors[this.clickColor[i]].code;
+
+			this.context.stroke();
+		}
     },
     addClick(x, y, dragging)
     {
       this.clickX.push(x);
       this.clickY.push(y);
       this.clickDrag.push(dragging);
-    }
+      this.clickColor.push(this.curColor);
+	},
+	colorSelected(color) {
+		this.curColor = color;
+	},
+	clearCanvas()
+	{
+		this.clickX = new Array();
+		this.clickY = new Array();
+		this.clickDrag = new Array();
+		this.clickColor = new Array();
+		this.redraw();
+	}
   }
 }
 </script>
@@ -92,18 +161,40 @@ export default {
 	background-color: white;
 	text-decoration: none;
 	list-style: none;
+	user-select: none;
 }
 
 canvas {
 	display: block;
 	margin: 20px auto;
-
+	margin-bottom:10px;
 	border: solid black 2px;
 }
 ul{
-	position: absolute;
 	margin: 5px;
 	padding: 0;
+	height: 40px;
 }
+ul#playerList{
+	position: absolute;
+}
+ul#colorPicker li{
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+	transition: transform 0.3s ease-out;
+}
+ul li:hover{
+	cursor: pointer;
+}
+ul#colorPicker li#clear{
+	display: block;
+	width: 90px;
+	height: 20px;
+	padding: 10px;
+	border: solid black 1px;
+	text-align: center;
+}
+
 
 </style>
