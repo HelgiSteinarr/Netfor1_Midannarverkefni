@@ -19,6 +19,8 @@ export default {
 </script>
 
 <script>
+import Game from '../gamelogic/game';
+
 export default {
   mounted() {
     this.context = this.$refs.canvas.getContext("2d");
