@@ -17,12 +17,14 @@ export default class Game {
             }
             case 1: { // Host
                 this.network = new HostNetwork();
-                this.network.onConnection = () => {
-
+                this.network.onConnection = client => {
+                    console.log("Player connected!");
+                    console.log(client);
                 };
-                this.network.onUpdate = () => {
-
+                this.network.onUpdate = data => {
+                    this.network.sendToAllClients(data);
                 };
+                break;
             }
         }
     }
@@ -31,5 +33,14 @@ export default class Game {
     {
         if (mode != 0) return;
         this.network.connect(ip);
+    }
+
+    sendDrawUpdate()
+    {
+        switch (mode) {
+            case 0: { // Client
+                this.network.sendToHost();
+            }
+        }
     }
 }
