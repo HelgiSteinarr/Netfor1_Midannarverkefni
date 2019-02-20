@@ -7,11 +7,12 @@ export default class HostNetwork {
     {
         this.connections = [];
         this.conn = io(server);
-        this.conn.on('connection', this.onConnection)
+        this.conn.on('connection', this.connected)
         this.onUpdate = (data) => {};
+        this.onConnection = () => {};
     }
 
-    onConnection(client)
+    connected(client)
     {
         this.connections.push(client);
         client.on('event', (data) => {
@@ -20,6 +21,7 @@ export default class HostNetwork {
         client.on('disconnect', () => {
             console.log("Player disconnected")
         });
+        this.onConnection();
     }
 
 }
