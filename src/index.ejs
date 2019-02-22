@@ -12,6 +12,53 @@
     <% } %>
   </head>
   <body>
+
+    <div id="title_bar">
+		<div id="drag_area"></div>
+        <ul>
+            <li id="minimise_btn" onclick="theWindow.minimize();">
+				<i class="fas fa-window-minimize"></i> <!--Minimise icon-->
+		    </li>
+		    <li id="maximise_unmax_btn" onclick="max_unmax_calc();">
+				<i id="restore_ico" class="fas fa-compress-arrows-alt" style="display:none;"></i> <!--Restore icon-->
+				<i id="max_ico" class="fas fa-arrows-alt"></i> <!--Maximize icon-->
+			</li>
+			<li id="exit_btn" onclick="theWindow.close();">
+				<i class="far fa-times-circle"></i>  <!--Exit icon-->
+			</li>
+        </ul>
+	</div>
+	<script>
+	const {BrowserWindow} = require('electron').remote;
+	var theWindow = BrowserWindow.getFocusedWindow();
+	
+	function max_unmax_calc(arg=null){
+		let max_ico = document.getElementById("max_ico");
+		let restore_ico = document.getElementById("restore_ico");
+		if(theWindow.isMaximized())
+		{
+			max_ico.style = "display: none;";
+			restore_ico.style = "display: inline-block;";
+			console.log("unmaximize");
+			if (arg != "check"){
+				max_ico.style = "display: inline-block;";
+				restore_ico.style = "display: none;";
+				theWindow.unmaximize();
+			}
+		}else{
+			max_ico.style = "display: inline-block;";
+			restore_ico.style = "display: none;";
+			console.log("maximize");
+			if(arg != "check"){
+				max_ico.style = "display: none;";
+				restore_ico.style = "display: inline-block;";
+				theWindow.maximize();
+			}
+			
+		}
+	}
+	max_unmax_calc("check");
+		</script>    
     <div id="app"></div>
     <!-- Set `__static` path to static files in production -->
     <% if (!process.browser) { %>

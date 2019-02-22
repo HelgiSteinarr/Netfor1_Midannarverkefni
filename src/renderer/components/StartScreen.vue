@@ -44,7 +44,43 @@
     }
   }
 </script>
-
+<style> /*Non scoped so all windows inherit these*/
+	div#title_bar{
+		display:flex;
+		height: 30px;
+		user-select: none;
+		text-align: right;
+		vertical-align: center;
+	}
+	div#title_bar div#drag_area{
+		-webkit-app-region: drag;
+		display: inline-block;
+		height: 100%;
+		width: 100%;
+	}
+	div#title_bar ul{
+		text-align: right;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		width: 100px;
+		height: 30px;
+		vertical-align: center;
+	}
+	div#title_bar ul li{
+		display: inline-block;
+		font-size: 25px;
+		margin-top: 2px;
+		padding: 0px 2px 0px 2px;
+	}
+	div#title_bar ul li:hover{
+		color: red;
+	}
+	body{
+		margin: 0;
+		height: 100%;
+	}
+</style>
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 @import url('https://fonts.googleapis.com/css?family=Alice|Fredericka+the+Great|Righteous|ZCOOL+KuaiLe');
@@ -73,7 +109,7 @@ body {
 		rgba(255, 255, 255, 1) 40%,
 		rgba(229, 229, 229, .9) 100%
 	);
-	height: 100vh;
+	height: 95vh;
 	padding: 60px 80px;
 	width: 100vw;
 }
