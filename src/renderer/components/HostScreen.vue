@@ -45,6 +45,13 @@ export default {
             timeLimit: "",
             playerAmount: ""
         }
+    },
+    methods: {
+        startGame()
+        {
+            game.start(1);
+            this.$router.push("/game");
+        }
     }
 }
 </script>

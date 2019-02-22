@@ -1,46 +1,76 @@
 /*jshint esversion: 6 */
-var ClientNetwork = require('./clientNetwork.js');
-var HostNetwork = require('./hostNetwork.js');
+import ClientNetwork from './clientNetwork'
+import HostNetwork from './hostNetwork'
+//var ClientNetwork = require('./clientNetwork.js');
+//var HostNetwork = require('./hostNetwork.js');
 
 export default class Game {
 
-    constructor(mode)
+    constructor(mode = -1)
     {
         this.mode = mode;
-        switch (mode) {
-            case 0: { // Client 
+        this.updateCanvas = null;
+        this.network = null
+    }
+
+    start(mode, ip=null)
+    {
+        this.mode = mode
+        switch (this.mode) {
+            case 0: { // Client
+                if (ip == null) return;
                 this.network = new ClientNetwork();
-                this.network.onUpdate = (data) => {
+                this.connect(ip)
+                this.network.onUpdate = data => {
 
                 };
                 break;
             }
             case 1: { // Host
+                const self = this;
                 this.network = new HostNetwork();
                 this.network.onConnection = client => {
                     console.log("Player connected!");
                     console.log(client);
                 };
                 this.network.onUpdate = data => {
-                    this.network.sendToAllClients(data);
+                    this.sendToAllClients(data);
+                    if (data.type == "draw") {
+                        self.onDrawUpdate(data);
+                    }
                 };
                 break;
             }
         }
     }
 
+    get isHost()
+    {
+        return this.mode == 1;
+    }
+
+    get isGameStarted()
+    {
+        return this.mode != -1;
+    }
+
     connect(ip)
     {
-        if (mode != 0) return;
+        if (!this.isHost) return;
         this.network.connect(ip);
     }
 
     sendDrawUpdate()
     {
-        switch (mode) {
-            case 0: { // Client
-                this.network.sendToHost();
-            }
+        if (!this.isHost) return;
+        this.network.sendToHost();
+    }
+
+    onDrawUpdate()
+    {
+        if (this.updateCanvas != null)
+        {
+            this.updateCanvas()
         }
     }
 }

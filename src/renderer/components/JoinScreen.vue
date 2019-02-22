@@ -16,7 +16,7 @@
                     <input type="text" :textInput="usrName" required placeholder="Biggus Dickus.." title="Any name you want!">
                 </li>
             </ul>
-            
+            <a id="startButton" @click="startGame">Start</a>
         </span>
     </main>
 </template>
@@ -29,11 +29,18 @@ export default {
             gameId: "",
             usrName: ""
         }
+    },
+    methods: {
+        startGame()
+        {
+            game.start(0, this.gameId);
+            this.$router.push("/game");
+        }
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     ul{
         list-style: none;
         text-align: center;
@@ -57,5 +64,15 @@ export default {
     #back:hover{
         color: purple;
         cursor: pointer;
+    }
+    #startButton {
+        display: block;
+        width: 100px;
+        text-align: center;
+        margin: 0 auto;
+        &:hover {
+            cursor: default;
+            color: green;
+        }
     }
 </style>
