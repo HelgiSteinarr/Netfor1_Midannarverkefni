@@ -27,7 +27,7 @@
                     <span>TODO: ADD MORE SETTINGS</span><br>
                 </li>
 				<li>
-					<span id="startBtn">Start Game</span>
+					<span @click="startGame" id="startBtn">Start Game</span>
 				</li>
             </ul>
             
