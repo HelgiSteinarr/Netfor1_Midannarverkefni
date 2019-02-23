@@ -17,13 +17,13 @@ export default new Router({
     },
     {
       path: '/game',
-      name: 'join-screen',
-      component: require('@/components/JoinScreen').default
+      name: 'game-screen',
+      component: require('@/components/GameScreen').default
     },
     {
       path: '/join',
-      name: 'game-screen',
-      component: require('@/components/GameScreen').default
+      name: 'join-screen',
+      component: require('@/components/JoinScreen').default
     },
     {
       path: '/exit',

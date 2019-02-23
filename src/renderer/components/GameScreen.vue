@@ -35,6 +35,12 @@ mounted() {
 	document.onmouseup = () => {
 		this._mouseDown = false;	
 	};
+
+	if (game.isHost) {
+		
+	} else {
+		game.updateCanvas = this.updateCanvas;
+	}
 },
 data() {
 	return {
@@ -115,8 +121,8 @@ methods: {
       	this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height); // Clears the canvas
   
       	/*this.context.strokeStyle = "#df4b26";*/
-		this.context.lineJoin = "round";
-		this.context.lineWidth = 5;
+			this.context.lineJoin = "round";
+			this.context.lineWidth = 5;
           
 		for(let i=0; i < this.clickX.length; i++) {		
 			this.context.beginPath();
@@ -139,19 +145,28 @@ methods: {
       this.clickY.push(y);
       this.clickDrag.push(dragging);
       this.clickColor.push(this.curColor);
-	},
-	colorSelected(color) {
-		this.curColor = color;
-	},
-	clearCanvas()
-	{
-		this.clickX = new Array();
-		this.clickY = new Array();
-		this.clickDrag = new Array();
-		this.clickColor = new Array();
-		this.redraw();
+		},
+		colorSelected(color) {
+			this.curColor = color;
+		},
+		clearCanvas()
+		{
+			this.clickX = new Array();
+			this.clickY = new Array();
+			this.clickDrag = new Array();
+			this.clickColor = new Array();
+			this.redraw();
+		},
+		updateCanvas(clickX, clickY, clickDrag, clickColor)
+		{
+			this.clickX = clickX
+			this.clickY = clickY
+			this.clickDrag = clickDrag
+			this.clickColor = clickColor
+		}
 	}
-  }
+	
+
 }
 </script>
 
