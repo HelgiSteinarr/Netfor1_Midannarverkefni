@@ -51,8 +51,9 @@
 		user-select: none;
 		vertical-align: center;
 		background-color: #e0e0e0;
-
 		border-radius: 5px 5px 0px 0px;
+		font-family: 'Source Sans Pro', sans-serif; 
+		
 	}
 	div#title_bar div#drag_area{
 		-webkit-app-region: drag;
@@ -73,7 +74,7 @@
 	div#title_bar ul li{
 		display: inline-block;
 		font-size: 25px;
-		margin-top: 2px;
+		
 		padding: 0px 2px 0px 2px;
 	}
 	div#title_bar ul li:hover{
