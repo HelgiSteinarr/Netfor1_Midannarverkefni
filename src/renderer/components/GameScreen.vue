@@ -145,6 +145,10 @@ methods: {
       this.clickY.push(y);
       this.clickDrag.push(dragging);
       this.clickColor.push(this.curColor);
+			if (game.isHost)
+			{
+				game.sendDrawUpdate(this.clickX, this.clickY, this.clickDrag, this.clickColor)
+			}
 		},
 		colorSelected(color) {
 			this.curColor = color;
@@ -163,6 +167,7 @@ methods: {
 			this.clickY = clickY
 			this.clickDrag = clickDrag
 			this.clickColor = clickColor
+			this.redraw();
 		}
 	}
 	

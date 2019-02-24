@@ -60,17 +60,29 @@ export default class Game {
         this.network.connect(ip);
     }
 
-    sendDrawUpdate()
+    sendDrawUpdate(clickX, clickY, clickDrag, clickColor)
     {
-        if (!this.isHost) return;
-        this.network.sendToHost();
+        if (this.isHost)
+        {
+            this.network.sendToAllClients({
+                type: "draw",
+                clickX,
+                clickY,
+                clickDrag,
+                clickColor
+            });
+        }
+        else 
+        {
+            this.network.sendToHost();
+        }
     }
 
-    onDrawUpdate()
+    onDrawUpdate(data)
     {
-        if (this.updateCanvas != null)
+        if (this.updateCanvas != null && data.type == "draw")
         {
-            this.updateCanvas()
+            this.updateCanvas(data.clickX, data.clickY, data.clickDrag, data.clickColor);
         }
     }
 }
