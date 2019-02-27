@@ -37,7 +37,7 @@ export default class Game {
                     console.log(client);
                 };
                 this.network.onUpdate = data => {
-                    this.sendToAllClients(data);
+                    //sendToAllClients(data);
                     if (data.type == "draw") {
                         console.log("Updating draw");
                         self.onDrawUpdate(data);
