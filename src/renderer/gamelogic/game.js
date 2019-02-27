@@ -22,6 +22,7 @@ export default class Game {
                 this.network = new ClientNetwork();
                 this.connect(ip);
                 this.network.onUpdate = data => {
+                    console.log("onUpdate");
                     if (data.type == "draw") {
                         console.log("Updating draw");
                         self.onDrawUpdate(data);
