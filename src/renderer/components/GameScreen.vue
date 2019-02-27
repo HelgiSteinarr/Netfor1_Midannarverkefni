@@ -39,7 +39,7 @@ mounted() {
 	};
 
 	if (game.isHost) {
-		
+		game.updateCanvas = this.updateCanvas;
 	} else {
 		game.updateCanvas = this.updateCanvas;
 	}
