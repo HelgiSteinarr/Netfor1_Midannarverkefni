@@ -158,8 +158,8 @@ methods: {
 			this.context.lineTo(this.clickX[i], this.clickY[i]);
 			this.context.closePath();
 
-			this.context.strokeStyle = this.colors[this.clickColor[i]].code;
-			this.context.lineWidth = this.sizes[this.clickSize[i]].radius;
+			//this.context.strokeStyle = this.colors[this.clickColor[i]].code;
+			//this.context.lineWidth = this.sizes[this.clickSize[i]].radius;
 			this.context.stroke();
 		}
     },
