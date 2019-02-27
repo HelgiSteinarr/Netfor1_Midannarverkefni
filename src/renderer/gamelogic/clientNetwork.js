@@ -23,6 +23,7 @@ export default class ClientNetwork {
         this.hostConnection.on('connect', () => {
             self.connected = true;
             self.onConnected();
+            console.log("connected");
         });
         this.hostConnection.on('disconnect', () => {
             self.connected = false;
