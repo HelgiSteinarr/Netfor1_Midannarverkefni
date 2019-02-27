@@ -37,7 +37,8 @@ export default class ClientNetwork {
 
     sendToHost(data)
     {
-        if (!connected) {
+        console.log("sendToHost")
+        if (!this.connected) {
             console.log("Error: not connected (L43, clientNetwork.js)");
             return;
         }
