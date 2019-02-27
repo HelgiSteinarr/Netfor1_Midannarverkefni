@@ -158,8 +158,8 @@ methods: {
 			this.context.lineTo(this.clickX[i], this.clickY[i]);
 			this.context.closePath();
 
-			//this.context.strokeStyle = this.colors[this.clickColor[i]].code;
-			//this.context.lineWidth = this.sizes[this.clickSize[i]].radius;
+			this.context.strokeStyle = this.colors[this.clickColor[i]].code;
+			this.context.lineWidth = this.sizes[this.clickSize[i]].radius;
 			this.context.stroke();
 		}
     },
@@ -170,7 +170,7 @@ methods: {
       this.clickDrag.push(dragging);
 	  this.clickColor.push(this.curColor);
 	  this.clickSize.push(this.curSize);
-				game.sendDrawUpdate(this.clickX, this.clickY, this.clickDrag, this.clickColor)
+				game.sendDrawUpdate(this.clickX, this.clickY, this.clickDrag, this.clickColor, this.clickSize);
 		},
 		colorSelected(color) {
 			this.curColor = color;
@@ -186,12 +186,13 @@ methods: {
 			this.clickColor = new Array();
 			this.redraw();
 		},
-		updateCanvas(clickX, clickY, clickDrag, clickColor)
+		updateCanvas(clickX, clickY, clickDrag, clickColor, clickSize)
 		{
-			this.clickX = clickX
-			this.clickY = clickY
-			this.clickDrag = clickDrag
-			this.clickColor = clickColor
+			this.clickX = clickX;
+			this.clickY = clickY;
+			this.clickDrag = clickDrag;
+			this.clickColor = clickColor;
+			this.clickSize = clickSize;
 			this.redraw();
 		}
 	}

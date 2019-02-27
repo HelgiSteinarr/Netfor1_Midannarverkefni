@@ -64,7 +64,7 @@ export default class Game {
         this.network.connect(ip);
     }
 
-    sendDrawUpdate(clickX, clickY, clickDrag, clickColor)
+    sendDrawUpdate(clickX, clickY, clickDrag, clickColor, clickSize)
     {
         console.log("sendDrawUpdate");
         if (this.isHost)
@@ -75,7 +75,8 @@ export default class Game {
                 clickX,
                 clickY,
                 clickDrag,
-                clickColor
+                clickColor,
+                clickSize
             });
         }
         else 
@@ -86,7 +87,8 @@ export default class Game {
                 clickX,
                 clickY,
                 clickDrag,
-                clickColor
+                clickColor,
+                clickSize
             });
         }
     }
@@ -99,7 +101,7 @@ export default class Game {
         if (this.updateCanvas != null && data.type == "draw")
         {
             console.log("updcanvas ekki null og data draw");
-            this.updateCanvas(data.clickX, data.clickY, data.clickDrag, data.clickColor);
+            this.updateCanvas(data.clickX, data.clickY, data.clickDrag, data.clickColor, data.clickSize);
         }
     }
 }
