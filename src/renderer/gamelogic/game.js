@@ -22,7 +22,9 @@ export default class Game {
                 this.network = new ClientNetwork();
                 this.connect(ip)
                 this.network.onUpdate = data => {
-
+                    if (data.type == "draw") {
+                        self.onDrawUpdate(data);
+                    }
                 };
                 break;
             }
