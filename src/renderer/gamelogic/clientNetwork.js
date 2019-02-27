@@ -27,16 +27,18 @@ export default class ClientNetwork {
             self.connected = true;
             self.onConnected();
             console.log("connected");
+
+            self.hostConnection.on('message', (message) => {
+                console.log("message");
+                console.log(message);
+                self.event(message);
+            });
         });
         this.hostConnection.on('disconnect', () => {
             self.connected = false;
             console.log("Disconnected");
         });
-        this.hostConnection.on('event', this.event);
-        this.hostConnection.on('message', (message) => {
-            console.log("message");
-            console.log(message);
-        });
+        //this.hostConnection.on('event', this.event);
     }
 
     sendToHost(data)
