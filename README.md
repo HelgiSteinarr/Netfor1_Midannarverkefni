@@ -1,6 +1,6 @@
-# Netforritun miðannarverkefni
+# Netforritun Miðannarverkefni
 
-> Verkefni í entforritun
+> Verkefni í netforritun
 
 #### Setup
 
