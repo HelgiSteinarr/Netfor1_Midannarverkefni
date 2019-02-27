@@ -25,10 +25,10 @@ export default new Router({
       name: 'join-screen',
       component: require('@/components/JoinScreen').default
     },
-    {
+    /*{
       path: '/exit',
       name: 'game-screen',
       component: require('@/components/GameScreen').default
-    }
+    }*/
   ]
 })

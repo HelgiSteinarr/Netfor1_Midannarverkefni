@@ -12,6 +12,8 @@
 				@mouseenter="mouseEnter"></canvas>
 		<ul id="colorPicker">
 			<li id="clear" @click="clearCanvas()"> Clear canvas</li>
+			<li id="clear" @click="colorSelected(8)"> Eraser</li>
+			<li v-for="size of sizes" :key="sizes.indexOf(size)" @click="sizeSelected(sizes.indexOf(size))" :style="{transform: (curSize == sizes.indexOf(size) ? 'scale(0.9)' : 'scale(1)') }">{{sizes[curSize].name}}</li>
 			<li v-for="color of colors" :key="colors.indexOf(color)" @click="colorSelected(colors.indexOf(color))" :style="{background: color.code, transform: (curColor == colors.indexOf(color) ? 'scale(0.9)' : 'scale(1)') }"></li>
 		</ul>
 	</main>
@@ -51,6 +53,24 @@ data() {
 		clickDrag: new Array(),
 		clickColor: new Array(),
 		_mouseDown: false,
+		clickSize: new Array(),
+		curSize: 1,
+		sizes: [{
+			name: "small",
+			radius: 2
+		},
+		{
+			name: "normal",
+			radius: 5
+		},
+		{
+			name: "large",
+			radius: 10
+		},
+		{
+			name: "huge",
+			radius: 16
+		}],
 		curColor: 0,
 		colors: [{
 			name:"Red",
@@ -83,6 +103,10 @@ data() {
 		{
 			name:"Black",
 			code:"#000000"
+		},
+		{
+			name:"White",
+			code:"#FFF"
 		}]
 	}
 },
@@ -122,7 +146,7 @@ methods: {
   
       	/*this.context.strokeStyle = "#df4b26";*/
 			this.context.lineJoin = "round";
-			this.context.lineWidth = 5;
+			/*this.context.lineWidth = 5;*/
           
 		for(let i=0; i < this.clickX.length; i++) {		
 			this.context.beginPath();
@@ -135,7 +159,7 @@ methods: {
 			this.context.closePath();
 
 			this.context.strokeStyle = this.colors[this.clickColor[i]].code;
-
+			this.context.lineWidth = this.sizes[this.clickSize[i]].radius;
 			this.context.stroke();
 		}
     },
@@ -144,7 +168,8 @@ methods: {
       this.clickX.push(x);
       this.clickY.push(y);
       this.clickDrag.push(dragging);
-      this.clickColor.push(this.curColor);
+	  this.clickColor.push(this.curColor);
+	  this.clickSize.push(this.curSize);
 			if (game.isHost)
 			{
 				game.sendDrawUpdate(this.clickX, this.clickY, this.clickDrag, this.clickColor)
@@ -152,6 +177,9 @@ methods: {
 		},
 		colorSelected(color) {
 			this.curColor = color;
+		},
+		sizeSelected(size){
+			this.curSize = size;
 		},
 		clearCanvas()
 		{
@@ -178,13 +206,13 @@ methods: {
 
 <style scoped>
 * {
-	background-color: white;
+	
 	text-decoration: none;
 	list-style: none;
 	user-select: none;
 }
-
 canvas {
+	background-color: white;
 	display: block;
 	margin: 20px auto;
 	margin-bottom:10px;
