@@ -11,6 +11,7 @@ export default class HostNetwork {
         this.conn.on('connection', this.connected)
         this.onUpdate = data => {};
         this.onConnection = client => {};
+        io.listen(3000);
     }
 
     connected(client)
