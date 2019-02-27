@@ -1,6 +1,6 @@
-# Netforritun miðannarverkefni
+# Netforritun Miðannarverkefni
 
-> Verkefni í entforritun
+> Verkefni í netforritun
 
 #### Setup
 
@@ -14,9 +14,6 @@ npm run dev
 # build electron application for production
 npm run build
 
-
-# lint all JS/Vue component files in `src/`
-npm run lint
 
 ```
 
