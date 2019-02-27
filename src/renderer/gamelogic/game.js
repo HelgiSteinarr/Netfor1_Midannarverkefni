@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
-import ClientNetwork from './clientNetwork'
-import HostNetwork from './hostNetwork'
+import ClientNetwork from './clientNetwork';
+import HostNetwork from './hostNetwork';
 //var ClientNetwork = require('./clientNetwork.js');
 //var HostNetwork = require('./hostNetwork.js');
 
@@ -10,19 +10,19 @@ export default class Game {
     {
         this.mode = mode;
         this.updateCanvas = null;
-        this.network = null
+        this.network = null;
     }
 
     start(mode, ip=null)
     {
-        this.mode = mode
+        this.mode = mode;
         switch (this.mode) {
             case 0: { // Client
                 if (ip == null) return;
                 this.network = new ClientNetwork();
-                this.connect(ip)
+                this.connect(ip);
                 this.network.onUpdate = data => {
-
+                    
                 };
                 break;
             }

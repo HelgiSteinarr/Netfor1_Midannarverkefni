@@ -18,7 +18,7 @@ export default class ClientNetwork {
     
     connect(ip)
     {
-        console.log("Trying to connect to " + ip)
+        console.log("Trying to connect to " + ip);
         let self = this;
         this.hostConnection = io(ip);
         this.hostConnection.on('connect', () => {
