@@ -170,10 +170,7 @@ methods: {
       this.clickDrag.push(dragging);
 	  this.clickColor.push(this.curColor);
 	  this.clickSize.push(this.curSize);
-			if (game.isHost)
-			{
 				game.sendDrawUpdate(this.clickX, this.clickY, this.clickDrag, this.clickColor)
-			}
 		},
 		colorSelected(color) {
 			this.curColor = color;

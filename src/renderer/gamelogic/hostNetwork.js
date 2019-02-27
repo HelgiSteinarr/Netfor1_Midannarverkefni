@@ -33,6 +33,7 @@ export default class HostNetwork {
 
     sendToAllClients(data)
     {
+        console.log("Sending data (sendToAllClients)")
         for (let client in this.connections) {
             client.send(JSON.stringify(data));
         }

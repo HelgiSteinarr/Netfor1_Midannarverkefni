@@ -66,8 +66,10 @@ export default class Game {
 
     sendDrawUpdate(clickX, clickY, clickDrag, clickColor)
     {
+        console.log("sendDrawUpdate");
         if (this.isHost)
         {
+            console.log("isHost");
             this.network.sendToAllClients({
                 type: "draw",
                 clickX,
@@ -78,14 +80,23 @@ export default class Game {
         }
         else 
         {
-            this.network.sendToHost();
+            console.log("!host")
+            this.network.sendToHost({
+                type: "draw",
+                clickX,
+                clickY,
+                clickDrag,
+                clickColor
+            });
         }
     }
 
     onDrawUpdate(data)
     {
+        console.log("onDrawUpdate");
         if (this.updateCanvas != null && data.type == "draw")
         {
+            console.log("updcanvas ekki null og data draw");
             this.updateCanvas(data.clickX, data.clickY, data.clickDrag, data.clickColor);
         }
     }

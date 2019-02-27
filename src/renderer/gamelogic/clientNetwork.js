@@ -22,7 +22,7 @@ export default class ClientNetwork {
     {
         console.log("Trying to connect to " + ip);
         let self = this;
-        this.hostConnection = io(ip);
+        this.hostConnection = new io(ip);
         this.hostConnection.on('connect', () => {
             self.connected = true;
             self.onConnected();
