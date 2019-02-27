@@ -21,6 +21,8 @@ export default class HostNetwork {
         console.log(client);
         this.connections.push(client);
         client.on('event', data => {
+            console.log("Recieved data");
+            console.log(data);
             this.onUpdate(JSON.parse(data));
         });
         client.on('disconnect', () => {

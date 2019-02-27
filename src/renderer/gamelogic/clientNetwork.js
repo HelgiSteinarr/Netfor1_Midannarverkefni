@@ -13,6 +13,8 @@ export default class ClientNetwork {
 
     event(data)
     {
+        console.log("Recieved data");
+        console.log(data);
         this.onUpdate(data);
     }
     

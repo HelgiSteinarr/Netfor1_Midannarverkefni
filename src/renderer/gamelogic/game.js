@@ -23,6 +23,7 @@ export default class Game {
                 this.connect(ip);
                 this.network.onUpdate = data => {
                     if (data.type == "draw") {
+                        console.log("Updating draw");
                         self.onDrawUpdate(data);
                     }
                 };
@@ -38,6 +39,7 @@ export default class Game {
                 this.network.onUpdate = data => {
                     this.sendToAllClients(data);
                     if (data.type == "draw") {
+                        console.log("Updating draw");
                         self.onDrawUpdate(data);
                     }
                 };
