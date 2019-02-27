@@ -13,7 +13,7 @@
 		<ul id="colorPicker">
 			<li id="clear" @click="clearCanvas()"> Clear canvas</li>
 			<li id="clear" @click="colorSelected(8)"> Eraser</li>
-			<li v-for="size of sizes" :key="sizes.indexOf(size)" @click="sizeSelected(sizes.indexOf(size))" :style="{transform: (curSize == sizes.indexOf(size) ? 'scale(0.9)' : 'scale(1)') }">{{sizes[curSize].name}}</li>
+			<li v-for="size of sizes" :key="sizes.indexOf(size) + colors.length" @click="sizeSelected(sizes.indexOf(size))" :style="{transform: (curSize == sizes.indexOf(size) ? 'scale(0.9)' : 'scale(1)') }">{{sizes[curSize].name}}</li>
 			<li v-for="color of colors" :key="colors.indexOf(color)" @click="colorSelected(colors.indexOf(color))" :style="{background: color.code, transform: (curColor == colors.indexOf(color) ? 'scale(0.9)' : 'scale(1)') }"></li>
 		</ul>
 	</main>
