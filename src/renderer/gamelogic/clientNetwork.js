@@ -33,6 +33,10 @@ export default class ClientNetwork {
             console.log("Disconnected");
         });
         this.hostConnection.on('event', this.event);
+        this.hostConnection.on('message', (message) => {
+            console.log("message");
+            console.log(message);
+        });
     }
 
     sendToHost(data)

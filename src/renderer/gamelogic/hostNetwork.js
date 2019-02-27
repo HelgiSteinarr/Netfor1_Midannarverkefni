@@ -30,6 +30,10 @@ export default class HostNetwork {
             console.log(data);
             this.onUpdate(JSON.parse(data));
         });
+        client.on('message', (message) => {
+            console.log("message");
+            console.log(message)
+        });
         client.on('disconnect', () => {
             console.log("Player disconnected");
         });
