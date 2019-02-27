@@ -6,11 +6,13 @@ export default class HostNetwork {
 
     constructor()
     {
+        let self = this;
         console.log("Running constructor for host network")
         this.connections = [];
         this.conn = io(3000);
-        this.conn.on('connection', () => {
+        this.conn.on('connection', client => {
             console.log("Connected!")
+            self.connected(client);
         });
         // this.conn.on('connection', this.connected);
         this.onUpdate = data => {};
