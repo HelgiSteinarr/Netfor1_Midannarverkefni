@@ -56,7 +56,7 @@ export default class Game {
 
     connect(ip)
     {
-        if (!this.isHost) return;
+        if (this.isHost) return;
         this.network.connect(ip);
     }
 

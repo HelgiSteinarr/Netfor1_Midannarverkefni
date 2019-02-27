@@ -9,11 +9,11 @@
             <ul>
                 <li>
                     <span>Game ID</span><br>
-                    <input type="text" :textInput="gameId" required placeholder="ABC123.." title="ID of the game you wish to join">
+                    <input type="text" v-model="gameId" required placeholder="ABC123.." title="ID of the game you wish to join">
                 </li>
                 <li>
                     <span>In-game Name</span><br>
-                    <input type="text" :textInput="usrName" required placeholder="Biggus Dickus.." title="Any name you want!">
+                    <input type="text" v-model="usrName" required placeholder="Biggus Dickus.." title="Any name you want!">
                 </li>
             </ul>
             <a id="startButton" @click="startGame">Start</a>
