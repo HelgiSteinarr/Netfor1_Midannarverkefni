@@ -94,6 +94,8 @@ export default class Game {
     onDrawUpdate(data)
     {
         console.log("onDrawUpdate");
+        console.log(this.updateCanvas);
+        console.log(data.type);
         if (this.updateCanvas != null && data.type == "draw")
         {
             console.log("updcanvas ekki null og data draw");
