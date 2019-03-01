@@ -19,12 +19,11 @@ export default class Game {
         switch (this.mode) {
             case 0: { // Client
                 if (ip == null) return;
+                const self = this;
                 this.network = new ClientNetwork();
                 this.connect(ip);
                 this.network.onUpdate = data => {
-                    console.log("onUpdate");
                     if (data.type == "draw") {
-                        console.log("Updating draw");
                         self.onDrawUpdate(data);
                     }
                 };
@@ -35,12 +34,10 @@ export default class Game {
                 this.network = new HostNetwork();
                 this.network.onConnection = client => {
                     console.log("Player connected!");
-                    console.log(client);
                 };
                 this.network.onUpdate = data => {
                     //sendToAllClients(data);
                     if (data.type == "draw") {
-                        console.log("Updating draw");
                         self.onDrawUpdate(data);
                     }
                 };
@@ -67,10 +64,8 @@ export default class Game {
 
     sendDrawUpdate(clickX, clickY, clickDrag, clickColor, clickSize)
     {
-        console.log("sendDrawUpdate");
         if (this.isHost)
         {
-            console.log("isHost");
             this.network.sendToAllClients({
                 type: "draw",
                 clickX,
@@ -82,7 +77,6 @@ export default class Game {
         }
         else 
         {
-            console.log("!host")
             this.network.sendToHost({
                 type: "draw",
                 clickX,
@@ -96,12 +90,8 @@ export default class Game {
 
     onDrawUpdate(data)
     {
-        console.log("onDrawUpdate");
-        console.log(this.updateCanvas);
-        console.log(data.type);
         if (this.updateCanvas != null && data.type == "draw")
         {
-            console.log("updcanvas ekki null og data draw");
             this.updateCanvas(data.clickX, data.clickY, data.clickDrag, data.clickColor, data.clickSize);
         }
     }

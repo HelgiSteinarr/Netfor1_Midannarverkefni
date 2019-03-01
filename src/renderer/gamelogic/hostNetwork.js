@@ -7,11 +7,9 @@ export default class HostNetwork {
     constructor()
     {
         let self = this;
-        console.log("Running constructor for host network")
         this.connections = [];
         this.conn = io(3000);
         this.conn.on('connection', client => {
-            console.log("Connected!")
             self.connected(client);
         });
         // this.conn.on('connection', this.connected);
@@ -23,11 +21,8 @@ export default class HostNetwork {
     connected(client)
     {
         console.log("Connected");
-        console.log(client);
         this.connections.push(client);
         client.on('message', (data) => {
-            console.log("message");
-            console.log(data);
             this.onUpdate(JSON.parse(data));
         });
         client.on('disconnect', () => {
@@ -38,7 +33,6 @@ export default class HostNetwork {
 
     sendToAllClients(data)
     {
-        console.log("Sending data (sendToAllClients)");
         for (let client of this.connections) {
             client.emit("message", JSON.stringify(data));
         }

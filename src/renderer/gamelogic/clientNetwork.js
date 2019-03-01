@@ -13,9 +13,7 @@ export default class ClientNetwork {
 
     event(data)
     {
-        console.log("Recieved data");
-        console.log(data);
-        this.onUpdate(data);
+        this.onUpdate(JSON.parse(data));
     }
     
     connect(ip)
@@ -29,8 +27,6 @@ export default class ClientNetwork {
             console.log("connected");
 
             self.hostConnection.on('message', (message) => {
-                console.log("message");
-                console.log(message);
                 self.event(message);
             });
         });
@@ -43,7 +39,6 @@ export default class ClientNetwork {
 
     sendToHost(data)
     {
-        console.log("sendToHost")
         if (!this.connected) {
             console.log("Error: not connected (L43, clientNetwork.js)");
             return;
